@@ -86,23 +86,25 @@
             align-items: center;
         }
         
-        .logo {
+ .logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .logo-icon {
-            background-color: var(--primary);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-        }
+ .logo-icon {
+    width: 120px;      /* adjust if needed */
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
         
         .logo-text {
             font-size: 1.8rem;
@@ -664,7 +666,7 @@
         }
         
         .about-image img {
-            width: 100%;
+            width: 50%;
             height: auto;
         }
         
@@ -867,9 +869,7 @@
                     <span><i class="fas fa-phone"></i> +233 123 456 789</span>
                     <span><i class="fas fa-clock"></i> Mon-Sat: 8am-8pm, Sun: 10am-6pm</span>
                 </div>
-                <div class="header-social">
-                    <span>Free delivery in Accra for orders over GH₵ 200</span>
-                </div>
+            
             </div>
         </div>
     </div>
@@ -880,8 +880,8 @@
                 <div class="header-content">
                     <div class="logo">
                         <div class="logo-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
+    <img src="iryan-logo.jpg" alt="Iryan Health & Organics logo">
+</div>
                         <div>
                             <div class="logo-text">Iryan <span>Health & Organics</span></div>
                             <div class="logo-tagline">Pure Health from Nature</div>
@@ -917,66 +917,122 @@
     <section class="hero" id="home">
         <div class="container">
             <h1>Pure Health, Pure Nature</h1>
-            <p>Discover Ghana's finest selection of organic foods, natural herbs, healthy teas, and premium supplements. Delivered fresh to your doorstep in Accra.</p>
+            <p>Discover  finest selection of organic foods, natural herbs, healthy teas, and premium supplements. Delivered fresh to your doorstep in Ghana.</p>
             <a href="#products" class="btn">Shop Now</a>
         </div>
     </section>
     
-    <!-- Categories -->
-    <section class="categories" id="categories">
-        <div class="container">
-            <h2 class="section-title">Our Healthy Categories</h2>
-            <div class="categories-grid">
-                <div class="category-card" onclick="filterProducts('herbs')">
-                    <div class="category-icon">
-                        <i class="fas fa-seedling"></i>
-                    </div>
-                    <h3>Natural Herbs</h3>
-                    <p>Traditional Ghanaian herbs for wellness</p>
+   <!-- Categories -->
+<section class="categories" id="categories">
+    <div class="container">
+        <h2 class="section-title">Our Healthy Categories</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="filterProducts('superfoods')">
+                <div class="category-icon">
+                    <i class="fas fa-apple-alt"></i>
                 </div>
-                
-                <div class="category-card" onclick="filterProducts('nuts')">
-                    <div class="category-icon">
-                        <i class="fas fa-apple-alt"></i>
-                    </div>
-                    <h3>Nuts & Seeds</h3>
-                    <p>Raw and organic nuts for healthy snacking</p>
+                <h3>Superfoods</h3>
+                <p>Power-packed nutrient-rich foods for optimal health</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('spices')">
+                <div class="category-icon">
+                    <i class="fas fa-pepper-hot"></i>
                 </div>
-                
-                <div class="category-card" onclick="filterProducts('grains')">
-                    <div class="category-icon">
-                        <i class="fas fa-wheat"></i>
-                    </div>
-                    <h3>Whole Grains</h3>
-                    <p>Unprocessed grains for nutritious meals</p>
+                <h3>Natural Spices</h3>
+                <p>Pure, organic spices for flavor and wellness</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('juices')">
+                <div class="category-icon">
+                    <i class="fas fa-glass-whiskey"></i>
                 </div>
-                
-                <div class="category-card" onclick="filterProducts('teas')">
-                    <div class="category-icon">
-                        <i class="fas fa-mug-hot"></i>
-                    </div>
-                    <h3>Natural Teas</h3>
-                    <p>Herbal teas for relaxation and health</p>
+                <h3>Juices</h3>
+                <p>Cold-pressed and natural fruit & vegetable juices</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('sweeteners')">
+                <div class="category-icon">
+                    <i class="fas fa-candy-cane"></i>
                 </div>
-                
-                <div class="category-card" onclick="filterProducts('supplements')">
-                    <div class="category-icon">
-                        <i class="fas fa-capsules"></i>
-                    </div>
-                    <h3>Supplements</h3>
-                    <p>Vitamins and natural health supplements</p>
+                <h3>Natural Sweeteners</h3>
+                <p>Healthy alternatives to refined sugar</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('ayurvedic')">
+                <div class="category-icon">
+                    <i class="fas fa-mortar-pestle"></i>
                 </div>
-                
-                <div class="category-card" onclick="filterProducts('oils')">
-                    <div class="category-icon">
-                        <i class="fas fa-oil-can"></i>
-                    </div>
-                    <h3>Healthy Oils</h3>
-                    <p>Cold-pressed oils for cooking & wellness</p>
+                <h3>Ayurvedic Powders</h3>
+                <p>Traditional herbal powders for holistic wellness</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('hairskin')">
+                <div class="category-icon">
+                    <i class="fas fa-spa"></i>
                 </div>
+                <h3>Hair & Skin Essentials</h3>
+                <p>Natural products for beauty and personal care</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('accessories')">
+                <div class="category-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3>Accessories</h3>
+                <p>Tools and equipment for healthy living</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('herbs')">
+                <div class="category-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Natural Herbs</h3>
+                <p>Traditional Ghanaian herbs for wellness</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('nuts')">
+                <div class="category-icon">
+                 <i class="fa-brands fa-nutritionix"></i>
+                </div>
+                <h3>Nuts & Seeds</h3>
+                <p>Raw and organic nuts for healthy snacking</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('grains')">
+                <div class="category-icon">
+                <i class="fa-solid fa-bowl-rice"></i>
+                </div>
+                <h3>Whole Grains</h3>
+                <p>Unprocessed grains for nutritious meals</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('teas')">
+                <div class="category-icon">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <h3>Natural Teas</h3>
+                <p>Herbal teas for relaxation and health</p>
+            </div>
+            
+            <div class="category-card" onclick="filterProducts('supplements')">
+                <div class="category-icon">
+                    <i class="fas fa-capsules"></i>
+                </div>
+                <h3>Supplements</h3>
+                <p>Vitamins and natural health supplements</p>
+            </div>
+             <div class="category-card" onclick="filterProducts('oils')">
+                <div class="category-icon">
+                  <i class="fa-solid fa-wine-bottle"></i>
+                </div>
+                <h3>Oils</h3>
+                <p>Healthy Oils</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     
     <!-- Products -->
     <section class="products" id="products">
@@ -988,7 +1044,15 @@
                 <button class="filter-btn" onclick="filterProducts('nuts')">Nuts & Seeds</button>
                 <button class="filter-btn" onclick="filterProducts('grains')">Whole Grains</button>
                 <button class="filter-btn" onclick="filterProducts('teas')">Natural Teas</button>
+                <button class="filter-btn" onclick="filterProducts('juices')">Juices</button>
+                <button class="filter-btn" onclick="filterProducts('spices')">Natural Spices</button>
+                <button class="filter-btn" onclick="filterProducts('sweetners')">Natural Sweetners</button>
+                <button class="filter-btn" onclick="filterProducts('ayurvedic')">Ayurvedic Powders</button>
+                <button class="filter-btn" onclick="filterProducts('hairskin')">Hair & Skin Essentials</button>
+                <button class="filter-btn" onclick="filterProducts('superfoods')">Super Foods</button>
+                <button class="filter-btn" onclick="filterProducts('accessories')">Accessories</button>
                 <button class="filter-btn" onclick="filterProducts('supplements')">Supplements</button>
+                <button class="filter-btn" onclick="filterProducts('oils')">Healthy Oils</button>
             </div>
             
             <div class="products-grid" id="productsGrid">
@@ -1068,17 +1132,14 @@
                     <div id="orderSummaryItems">
                         <!-- Order summary will be populated here -->
                     </div>
-                    <div class="order-summary-item" style="border-bottom: none;">
-                        <span>Delivery Fee:</span>
-                        <span id="deliveryFee">GH₵ 15.00</span>
-                    </div>
+                   
                     <div class="order-summary-item" style="font-weight: bold; font-size: 1.2rem;">
                         <span>Total:</span>
                         <span id="orderTotal">GH₵ 0.00</span>
                     </div>
                     <div style="margin-top: 20px; padding: 15px; background-color: var(--light-green); border-radius: 5px;">
-                        <p><i class="fas fa-info-circle"></i> Free delivery for orders over GH₵ 200 within Accra</p>
-                        <p><i class="fas fa-clock"></i> Same-day delivery available for orders placed before 2pm</p>
+                       
+                        <p><i class="fas fa-clock"></i> Same-day delivery available</p>
                     </div>
                 </div>
             </div>
@@ -1102,20 +1163,7 @@
                                 <p>No additives or preservatives</p>
                             </div>
                         </div>
-                        <div class="feature">
-                            <i class="fas fa-truck"></i>
-                            <div>
-                                <h4>Accra Delivery</h4>
-                                <p>Free delivery for large orders</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-seedling"></i>
-                            <div>
-                                <h4>Locally Sourced</h4>
-                                <p>Supporting Ghanaian farmers</p>
-                            </div>
-                        </div>
+                       
                         <div class="feature">
                             <i class="fas fa-award"></i>
                             <div>
@@ -1127,7 +1175,7 @@
                 </div>
                 
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Iryan Health Store">
+                    <img src="iryan-logo.jpg" alt="Iryan Health Store">
                 </div>
             </div>
         </div>
@@ -1166,7 +1214,18 @@
                         <li><a href="#" onclick="filterProducts('nuts')">Nuts & Seeds</a></li>
                         <li><a href="#" onclick="filterProducts('grains')">Whole Grains</a></li>
                         <li><a href="#" onclick="filterProducts('teas')">Herbal Teas</a></li>
+                        <li><a href="#" onclick="filterProducts('superfoods')">Super Foods</a></li>
+                        <li><a href="#" onclick="filterProducts('spices')">Natural Spices</a></li>
+                        <li><a href="#" onclick="filterProducts('ayurvedic')">Ayurvedic Powders</a></li>
+                        <li><a href="#" onclick="filterProducts('juices')">Juices</a></li>
+                        <li><a href="#" onclick="filterProducts('Sweetners')">Natural Sweetners</a></li>
+                        <li><a href="#" onclick="filterProducts('hairskin')">Hair & Skin Essentials</a></li>
+                        <li><a href="#" onclick="filterProducts('accessories')">Accessories</a></li>
                         <li><a href="#" onclick="filterProducts('supplements')">Supplements</a></li>
+                        <li><a href="#" onclick="filterProducts('oils')">Healthy Oils</a></li>
+                        
+                        
+
                     </ul>
                 </div>
                 
@@ -1183,7 +1242,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2024 Iryan Health & Organics. All rights reserved. | Madina, Accra</p>
+                <p>&copy; 2024 Iryan Health & Organics. All rights reserved. | Madina, Accra <a href="https://levi1894.city/">Built by Levi</a></p>
             </div>
         </div>
     </footer>
@@ -1194,105 +1253,184 @@
     </div>
     
     <script>
-        // Product Data
-        const products = [
-            {
-                id: 1,
-                name: "Moringa Powder",
-                category: "herbs",
-                price: 25.00,
-                image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721fa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Pure organic moringa powder, rich in vitamins and antioxidants."
-            },
-            {
-                id: 2,
-                name: "Neem Leaves",
-                category: "herbs",
-                price: 15.00,
-                image: "https://images.unsplash.com/photo-1587049633317-4c7d9e2c1b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Dried neem leaves for tea and natural remedies."
-            },
-            {
-                id: 3,
-                name: "Almonds",
-                category: "nuts",
-                price: 45.00,
-                image: "https://images.unsplash.com/photo-1550253006-4e6e9a07aa3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Raw California almonds, high in protein and healthy fats."
-            },
-            {
-                id: 4,
-                name: "Cashew Nuts",
-                category: "nuts",
-                price: 40.00,
-                image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Premium quality cashew nuts, great for snacking."
-            },
-            {
-                id: 5,
-                name: "Brown Rice",
-                category: "grains",
-                price: 20.00,
-                image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Organic brown rice, unprocessed and nutritious."
-            },
-            {
-                id: 6,
-                name: "Quinoa",
-                category: "grains",
-                price: 55.00,
-                image: "https://images.unsplash.com/photo-1519098901909-b1553a1190af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "High-protein quinoa, perfect for healthy meals."
-            },
-            {
-                id: 7,
-                name: "Ginger Tea",
-                category: "teas",
-                price: 18.00,
-                image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Organic ginger tea bags for digestion and immunity."
-            },
-            {
-                id: 8,
-                name: "Hibiscus Tea",
-                category: "teas",
-                price: 15.00,
-                image: "https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Dried hibiscus flowers for making soothing tea."
-            },
-            {
-                id: 9,
-                name: "Vitamin C Supplements",
-                category: "supplements",
-                price: 35.00,
-                image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Natural vitamin C supplements from rose hips."
-            },
-            {
-                id: 10,
-                name: "Omega-3 Capsules",
-                category: "supplements",
-                price: 60.00,
-                image: "https://images.unsplash.com/photo-1585435557343-3b092031c914?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Fish oil omega-3 capsules for heart health."
-            },
-            {
-                id: 11,
-                name: "Flax Seeds",
-                category: "nuts",
-                price: 22.00,
-                image: "https://images.unsplash.com/photo-1593197316200-7cb0656632c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Organic flax seeds, high in fiber and omega-3."
-            },
-            {
-                id: 12,
-                name: "Coconut Oil",
-                category: "oils",
-                price: 30.00,
-                image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-                description: "Cold-pressed virgin coconut oil for cooking and skincare."
-            }
-        ];
+        // Updated Product Data
+const products = [
+    // Superfoods
+    {
+        id: 1,
+        name: "Spirulina Powder",
+        category: "superfoods",
+        price: 35.00,
+        image: "https://images.unsplash.com/photo-1593197316200-7cb0656632c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Organic spirulina powder, rich in protein and antioxidants."
+    },
+    {
+        id: 2,
+        name: "Chia Seeds",
+        category: "superfoods",
+        price: 28.00,
+        image: "https://images.unsplash.com/photo-1515825832342-0e43f2fbb722?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Premium chia seeds, high in omega-3 and fiber."
+    },
+    
+    // Natural Spices
+    {
+        id: 3,
+        name: "Turmeric Powder",
+        category: "spices",
+        price: 18.00,
+        image: "https://images.unsplash.com/photo-1587049633317-4c7d9e2c1b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Pure organic turmeric powder for cooking and wellness."
+    },
+    {
+        id: 4,
+        name: "Cinnamon Sticks",
+        category: "spices",
+        price: 15.00,
+        image: "https://images.unsplash.com/photo-1550253006-4e6e9a07aa3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Organic cinnamon sticks for tea and cooking."
+    },
+    
+    // Juices
+    {
+        id: 5,
+        name: "Cold-Pressed Ginger Juice",
+        category: "juices",
+        price: 25.00,
+        image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Fresh cold-pressed ginger juice for immunity."
+    },
+    {
+        id: 6,
+        name: "Aloe Vera Juice",
+        category: "juices",
+        price: 22.00,
+        image: "https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Pure aloe vera juice for digestion and skin health."
+    },
+    
+    // Natural Sweeteners
+    {
+        id: 7,
+        name: "Raw Honey",
+        category: "sweeteners",
+        price: 40.00,
+        image: "https://images.unsplash.com/photo-1558636508-e0db3814bd1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Pure, raw honey with natural enzymes intact."
+    },
+    {
+        id: 8,
+        name: "Coconut Sugar",
+        category: "sweeteners",
+        price: 25.00,
+        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Low glycemic coconut sugar, perfect for baking."
+    },
+    
+    // Ayurvedic Powders
+    {
+        id: 9,
+        name: "Ashwagandha Powder",
+        category: "ayurvedic",
+        price: 45.00,
+        image: "https://images.unsplash.com/photo-1593197316200-7cb0656632c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Traditional ayurvedic powder for stress relief."
+    },
+    {
+        id: 10,
+        name: "Triphala Powder",
+        category: "ayurvedic",
+        price: 38.00,
+        image: "https://images.unsplash.com/photo-1587049633317-4c7d9e2c1b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Classic ayurvedic blend for digestive health."
+    },
+    
+    // Hair & Skin Essentials
+    {
+        id: 11,
+        name: "Argan Oil",
+        category: "hairskin",
+        price: 55.00,
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Pure argan oil for hair and skin nourishment."
+    },
+    {
+        id: 12,
+        name: "Shea Butter",
+        category: "hairskin",
+        price: 32.00,
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Raw shea butter for moisturizing and healing."
+    },
+    
+    // Accessories
+    {
+        id: 13,
+        name: "Glass Storage Jars",
+        category: "accessories",
+        price: 35.00,
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Set of 3 glass jars for food storage."
+    },
+    {
+        id: 14,
+        name: "Bamboo Utensils",
+        category: "accessories",
+        price: 28.00,
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Eco-friendly bamboo utensil set."
+    },
+    
+    // Original Categories (keep some)
+    {
+        id: 15,
+        name: "Moringa Powder",
+        category: "herbs",
+        price: 25.00,
+        image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721fa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Pure organic moringa powder, rich in vitamins."
+    },
+    {
+        id: 16,
+        name: "Almonds",
+        category: "nuts",
+        price: 45.00,
+        image: "https://images.unsplash.com/photo-1550253006-4e6e9a07aa3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Raw California almonds, high in protein."
+    },
+    {
+        id: 17,
+        name: "Quinoa",
+        category: "grains",
+        price: 55.00,
+        image: "https://images.unsplash.com/photo-1519098901909-b1553a1190af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "High-protein quinoa, perfect for healthy meals."
+    },
+    {
+        id: 18,
+        name: "Ginger Tea",
+        category: "teas",
+        price: 18.00,
+        image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Organic ginger tea bags for digestion."
+    },
+    {
+        id: 19,
+        name: "Vitamin C Supplements",
+        category: "supplements",
+        price: 35.00,
+        image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Natural vitamin C supplements from rose hips."
+    },
+    {
+        id: 20,
+        name: "Coconut Oil",
+        category: "oils",
+        price: 30.00,
+        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        description: "Cold-pressed virgin coconut oil."
+    }
+];
         
         // Shopping Cart
         let cart = JSON.parse(localStorage.getItem('iryanCart')) || [];
@@ -1374,18 +1512,25 @@
             displayProducts(category);
         }
         
-        // Get Category Name
-        function getCategoryName(category) {
-            const categories = {
-                'herbs': 'Natural Herbs',
-                'nuts': 'Nuts & Seeds',
-                'grains': 'Whole Grains',
-                'teas': 'Natural Teas',
-                'supplements': 'Supplements',
-                'oils': 'Healthy Oils'
-            };
-            return categories[category] || category;
-        }
+       // Get Category Name
+function getCategoryName(category) {
+    const categories = {
+        'superfoods': 'Superfoods',
+        'spices': 'Natural Spices',
+        'juices': 'Juices',
+        'sweeteners': 'Natural Sweeteners',
+        'ayurvedic': 'Ayurvedic Powders',
+        'hairskin': 'Hair & Skin Essentials',
+        'accessories': 'Accessories',
+        'herbs': 'Natural Herbs',
+        'nuts': 'Nuts & Seeds',
+        'grains': 'Whole Grains',
+        'teas': 'Natural Teas',
+        'supplements': 'Supplements',
+        'oils': 'Healthy Oils'
+    };
+    return categories[category] || category;
+}
         
         // Quantity Controls
         function increaseQty(productId) {
