@@ -24,6 +24,8 @@
             --text: #555;
             --gray: #f5f5f5;
             --border: #e0e0e0;
+            --whatsapp: #25D366;
+            --whatsapp-dark: #128C7E;
         }
         
         body {
@@ -86,25 +88,24 @@
             align-items: center;
         }
         
- .logo {
+        .logo {
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
- .logo-icon {
-    width: 120px;      /* adjust if needed */
-    height: auto;
-    display: flex;
-    align-items: center;
-}
-
-.logo-icon img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
+        .logo-icon {
+            width: 120px;
+            height: auto;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
         
         .logo-text {
             font-size: 1.8rem;
@@ -239,6 +240,15 @@
             background-color: #F57C00;
         }
         
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: var(--whatsapp-dark);
+        }
+        
         /* Categories */
         .categories {
             padding: 60px 0;
@@ -347,6 +357,12 @@
             height: 200px;
             width: 100%;
             object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-img:hover {
+            transform: scale(1.05);
         }
         
         .product-content {
@@ -369,6 +385,47 @@
             font-size: 0.9rem;
             margin-bottom: 15px;
             color: #666;
+        }
+        
+        /* Size Selection for Grains */
+        .size-selection {
+            margin-bottom: 15px;
+        }
+        
+        .size-selection label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .size-btn {
+            padding: 6px 12px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            color: var(--text);
+        }
+        
+        .size-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .size-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
         
         .product-price {
@@ -425,6 +482,93 @@
         
         .add-to-cart:hover {
             background-color: var(--primary-dark);
+        }
+        
+        /* Image Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--primary);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 10px;
         }
         
         /* Cart Sidebar */
@@ -486,6 +630,7 @@
             object-fit: cover;
             border-radius: 5px;
             margin-right: 15px;
+            cursor: pointer;
         }
         
         .cart-item-details {
@@ -624,6 +769,156 @@
             border-bottom: 1px solid var(--border);
         }
         
+        /* WhatsApp Modal */
+        .whatsapp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .whatsapp-modal.active {
+            display: flex;
+        }
+        
+        .whatsapp-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .whatsapp-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--whatsapp);
+        }
+        
+        .whatsapp-modal-header h3 {
+            color: var(--whatsapp-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .whatsapp-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .whatsapp-options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .whatsapp-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-option:hover {
+            border-color: var(--whatsapp);
+            background-color: #f0f9f0;
+        }
+        
+        .whatsapp-option.selected {
+            border-color: var(--whatsapp);
+            background-color: #f0f9f0;
+        }
+        
+        .whatsapp-option i {
+            font-size: 1.5rem;
+            color: var(--whatsapp);
+        }
+        
+        .whatsapp-option-content h4 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        
+        .whatsapp-option-content p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .whatsapp-instructions {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .whatsapp-instructions h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .whatsapp-instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .whatsapp-instructions li {
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: var(--whatsapp-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-float i {
+            font-size: 1.5rem;
+        }
+        
+        .whatsapp-float span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
         /* About Section */
         .about {
             padding: 60px 0;
@@ -740,6 +1035,31 @@
             font-size: 0.9rem;
         }
         
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1001;
+            max-width: 300px;
+        }
+        
+        .notification.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
         /* Responsive */
         @media (max-width: 992px) {
             .order-container {
@@ -793,6 +1113,10 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
+            
+            .whatsapp-float span {
+                display: none;
+            }
         }
         
         @media (max-width: 576px) {
@@ -807,31 +1131,12 @@
             .about-features {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 1001;
-            max-width: 300px;
-        }
-        
-        .notification.active {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 15px;
+            }
         }
     </style>
 </head>
@@ -855,7 +1160,52 @@
             </div>
             <div class="cart-buttons">
                 <button class="btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+                <button class="btn btn-whatsapp" onclick="sendOrderViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Order via WhatsApp
+                </button>
                 <button class="btn btn-secondary" onclick="closeCart()">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightbox-img" src="" alt="" class="lightbox-img">
+            <div class="lightbox-nav">
+                <button class="lightbox-prev" onclick="changeLightboxImage(-1)">‹</button>
+                <button class="lightbox-next" onclick="changeLightboxImage(1)">›</button>
+            </div>
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+    
+    <!-- WhatsApp Order Modal -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="whatsapp-modal-content">
+            <div class="whatsapp-modal-header">
+                <h3><i class="fab fa-whatsapp"></i> Order via WhatsApp</h3>
+                <button class="whatsapp-close" onclick="closeWhatsAppModal()">&times;</button>
+            </div>
+            
+            <div class="whatsapp-options" id="whatsappOptions">
+                <!-- Options will be populated dynamically -->
+            </div>
+            
+            <div class="whatsapp-instructions">
+                <h4>How to Order via WhatsApp:</h4>
+                <ol>
+                    <li>Select your preferred WhatsApp number above</li>
+                    <li>Click "Open WhatsApp" to start a chat</li>
+                    <li>Your order summary will be pre-filled in the message</li>
+                    <li>Review and send the message to place your order</li>
+                    <li>Our team will confirm your order within 24 hours</li>
+                </ol>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="closeWhatsAppModal()">Cancel</button>
             </div>
         </div>
     </div>
@@ -866,10 +1216,9 @@
             <div class="header-top-content">
                 <div class="header-contact">
                     <span><i class="fas fa-map-marker-alt"></i> Madina - Rawlings Circle, Accra</span>
-                    <span><i class="fas fa-phone"></i>  +233 59 714 4276</span>
+                    <span><i class="fas fa-phone"></i> +233 59 714 4276</span>
                     <span><i class="fas fa-clock"></i> Mon - Sat: 8am-8pm, Sun: Closed</span>
                 </div>
-            
             </div>
         </div>
     </div>
@@ -880,8 +1229,8 @@
                 <div class="header-content">
                     <div class="logo">
                         <div class="logo-icon">
-    <img src="iryan-logo.jpg" alt="Iryan Health & Organics logo">
-</div>
+                            <img src="iryan-logo.jpg" alt="Iryan Health & Organics logo">
+                        </div>
                         <div>
                             <div class="logo-text">Iryan <span>Health & Organics</span></div>
                             <div class="logo-tagline">Pure Health from Nature</div>
@@ -917,122 +1266,122 @@
     <section class="hero" id="home">
         <div class="container">
             <h1>Pure Health, Pure Nature</h1>
-            <p>Discover  finest selection of organic foods, natural herbs, healthy teas, and premium supplements. Delivered fresh to your doorstep in Ghana.</p>
+            <p>Discover finest selection of organic foods, natural herbs, healthy teas, and premium supplements. Delivered fresh to your doorstep in Ghana.</p>
             <a href="#products" class="btn">Shop Now</a>
         </div>
     </section>
     
-   <!-- Categories -->
-<section class="categories" id="categories">
-    <div class="container">
-        <h2 class="section-title">Our Healthy Categories</h2>
-        <div class="categories-grid">
-            <div class="category-card" onclick="filterProducts('superfoods')">
-                <div class="category-icon">
-                    <i class="fas fa-apple-alt"></i>
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Our Healthy Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterProducts('superfoods')">
+                    <div class="category-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Superfoods</h3>
+                    <p>Power-packed nutrient-rich foods for optimal health</p>
                 </div>
-                <h3>Superfoods</h3>
-                <p>Power-packed nutrient-rich foods for optimal health</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('spices')">
-                <div class="category-icon">
-                    <i class="fas fa-pepper-hot"></i>
+                
+                <div class="category-card" onclick="filterProducts('spices')">
+                    <div class="category-icon">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
+                    <h3>Natural Spices</h3>
+                    <p>Pure, organic spices for flavor and wellness</p>
                 </div>
-                <h3>Natural Spices</h3>
-                <p>Pure, organic spices for flavor and wellness</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('juices')">
-                <div class="category-icon">
-                    <i class="fas fa-glass-whiskey"></i>
+                
+                <div class="category-card" onclick="filterProducts('juices')">
+                    <div class="category-icon">
+                        <i class="fas fa-glass-whiskey"></i>
+                    </div>
+                    <h3>Juices</h3>
+                    <p>Cold-pressed and natural fruit & vegetable juices</p>
                 </div>
-                <h3>Juices</h3>
-                <p>Cold-pressed and natural fruit & vegetable juices</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('sweeteners')">
-                <div class="category-icon">
-                    <i class="fas fa-candy-cane"></i>
+                
+                <div class="category-card" onclick="filterProducts('sweeteners')">
+                    <div class="category-icon">
+                        <i class="fas fa-candy-cane"></i>
+                    </div>
+                    <h3>Natural Sweeteners</h3>
+                    <p>Healthy alternatives to refined sugar</p>
                 </div>
-                <h3>Natural Sweeteners</h3>
-                <p>Healthy alternatives to refined sugar</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('ayurvedic')">
-                <div class="category-icon">
-                    <i class="fas fa-mortar-pestle"></i>
+                
+                <div class="category-card" onclick="filterProducts('ayurvedic')">
+                    <div class="category-icon">
+                        <i class="fas fa-mortar-pestle"></i>
+                    </div>
+                    <h3>Ayurvedic Powders</h3>
+                    <p>Traditional herbal powders for holistic wellness</p>
                 </div>
-                <h3>Ayurvedic Powders</h3>
-                <p>Traditional herbal powders for holistic wellness</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('hairskin')">
-                <div class="category-icon">
-                    <i class="fas fa-spa"></i>
+                
+                <div class="category-card" onclick="filterProducts('hairskin')">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Hair & Skin Essentials</h3>
+                    <p>Natural products for beauty and personal care</p>
                 </div>
-                <h3>Hair & Skin Essentials</h3>
-                <p>Natural products for beauty and personal care</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('accessories')">
-                <div class="category-icon">
-                    <i class="fas fa-shopping-bag"></i>
+                
+                <div class="category-card" onclick="filterProducts('accessories')">
+                    <div class="category-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Accessories</h3>
+                    <p>Tools and equipment for healthy living</p>
                 </div>
-                <h3>Accessories</h3>
-                <p>Tools and equipment for healthy living</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('herbs')">
-                <div class="category-icon">
-                    <i class="fas fa-seedling"></i>
+                
+                <div class="category-card" onclick="filterProducts('herbs')">
+                    <div class="category-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Natural Herbs</h3>
+                    <p>Traditional Ghanaian herbs for wellness</p>
                 </div>
-                <h3>Natural Herbs</h3>
-                <p>Traditional Ghanaian herbs for wellness</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('nuts')">
-                <div class="category-icon">
-                 <i class="fa-brands fa-nutritionix"></i>
+                
+                <div class="category-card" onclick="filterProducts('nuts')">
+                    <div class="category-icon">
+                        <i class="fa-brands fa-nutritionix"></i>
+                    </div>
+                    <h3>Nuts & Seeds</h3>
+                    <p>Raw and organic nuts for healthy snacking</p>
                 </div>
-                <h3>Nuts & Seeds</h3>
-                <p>Raw and organic nuts for healthy snacking</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('grains')">
-                <div class="category-icon">
-                <i class="fa-solid fa-bowl-rice"></i>
+                
+                <div class="category-card" onclick="filterProducts('grains')">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-bowl-rice"></i>
+                    </div>
+                    <h3>Whole Grains</h3>
+                    <p>Unprocessed grains for nutritious meals</p>
                 </div>
-                <h3>Whole Grains</h3>
-                <p>Unprocessed grains for nutritious meals</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('teas')">
-                <div class="category-icon">
-                    <i class="fas fa-mug-hot"></i>
+                
+                <div class="category-card" onclick="filterProducts('teas')">
+                    <div class="category-icon">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3>Natural Teas</h3>
+                    <p>Herbal teas for relaxation and health</p>
                 </div>
-                <h3>Natural Teas</h3>
-                <p>Herbal teas for relaxation and health</p>
-            </div>
-            
-            <div class="category-card" onclick="filterProducts('supplements')">
-                <div class="category-icon">
-                    <i class="fas fa-capsules"></i>
+                
+                <div class="category-card" onclick="filterProducts('supplements')">
+                    <div class="category-icon">
+                        <i class="fas fa-capsules"></i>
+                    </div>
+                    <h3>Supplements</h3>
+                    <p>Vitamins and natural health supplements</p>
                 </div>
-                <h3>Supplements</h3>
-                <p>Vitamins and natural health supplements</p>
-            </div>
-             <div class="category-card" onclick="filterProducts('oils')">
-                <div class="category-icon">
-                  <i class="fa-solid fa-wine-bottle"></i>
+                
+                <div class="category-card" onclick="filterProducts('oils')">
+                    <div class="category-icon">
+                        <i class="fa-solid fa-wine-bottle"></i>
+                    </div>
+                    <h3>Oils</h3>
+                    <p>Healthy Oils</p>
                 </div>
-                <h3>Oils</h3>
-                <p>Healthy Oils</p>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
     
     <!-- Products -->
     <section class="products" id="products">
@@ -1046,7 +1395,7 @@
                 <button class="filter-btn" onclick="filterProducts('teas')">Natural Teas</button>
                 <button class="filter-btn" onclick="filterProducts('juices')">Juices</button>
                 <button class="filter-btn" onclick="filterProducts('spices')">Natural Spices</button>
-                <button class="filter-btn" onclick="filterProducts('sweetners')">Natural Sweetners</button>
+                <button class="filter-btn" onclick="filterProducts('sweeteners')">Natural Sweeteners</button>
                 <button class="filter-btn" onclick="filterProducts('ayurvedic')">Ayurvedic Powders</button>
                 <button class="filter-btn" onclick="filterProducts('hairskin')">Hair & Skin Essentials</button>
                 <button class="filter-btn" onclick="filterProducts('superfoods')">Super Foods</button>
@@ -1091,13 +1440,13 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="address">Delivery Address (Accra) *</label>
+                            <label for="address">Delivery Address *</label>
                             <textarea id="address" class="form-control" required></textarea>
                         </div>
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="area">Area in Accra *</label>
+                                <label for="area">Area *</label>
                                 <select id="area" class="form-control" required>
                                     <option value="">Select Area</option>
                                     <option value="madina">Madina</option>
@@ -1106,10 +1455,12 @@
                                     <option value="airport">Airport Residential</option>
                                     <option value="oshie">Osu</option>
                                     <option value="cantonments">Cantonments</option>
-                                    <option value="dansoman">Dansoman</td>
+                                    <option value="dansoman">Dansoman</option>
                                     <option value="teshie">Teshie</option>
                                     <option value="nungua">Nungua</option>
                                     <option value="tema">Tema</option>
+                                    <option value="kumasi">Kumasi</option>
+                                    <option value="other">Other</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -1124,6 +1475,13 @@
                         </div>
                         
                         <button type="submit" class="btn" style="width: 100%;">Place Order</button>
+                        
+                        <div class="form-group" style="margin-top: 20px; text-align: center;">
+                            <p style="margin-bottom: 10px; color: #666;">Or order directly via WhatsApp:</p>
+                            <button type="button" class="btn btn-whatsapp btn-full" onclick="sendOrderViaWhatsApp()">
+                                <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+                            </button>
+                        </div>
                     </form>
                 </div>
                 
@@ -1138,7 +1496,6 @@
                         <span id="orderTotal">GH₵ 0.00</span>
                     </div>
                     <div style="margin-top: 20px; padding: 15px; background-color: var(--light-green); border-radius: 5px;">
-                       
                         <p><i class="fas fa-clock"></i> Same-day delivery available</p>
                     </div>
                 </div>
@@ -1218,23 +1575,20 @@
                         <li><a href="#" onclick="filterProducts('spices')">Natural Spices</a></li>
                         <li><a href="#" onclick="filterProducts('ayurvedic')">Ayurvedic Powders</a></li>
                         <li><a href="#" onclick="filterProducts('juices')">Juices</a></li>
-                        <li><a href="#" onclick="filterProducts('Sweetners')">Natural Sweetners</a></li>
+                        <li><a href="#" onclick="filterProducts('sweeteners')">Natural Sweeteners</a></li>
                         <li><a href="#" onclick="filterProducts('hairskin')">Hair & Skin Essentials</a></li>
                         <li><a href="#" onclick="filterProducts('accessories')">Accessories</a></li>
                         <li><a href="#" onclick="filterProducts('supplements')">Supplements</a></li>
                         <li><a href="#" onclick="filterProducts('oils')">Healthy Oils</a></li>
-                        
-                        
-
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> Accra: Madina Rawlings Circle, adjacent Donewell Insurance  - Kumasi: Opposite KTI entrance, Amakom</li>
+                        <li><i class="fas fa-map-marker-alt"></i>Accra, Madina Rawlings Circle, adjacent Donewell Insurance  - Kumasi: Opposite KTI entrance, Amakom</li>
                         <li><i class="fas fa-phone"></i> Accra: +233 59 714 4276 - Kumasi: +233 55 044 3487</li>
-                        <li><i class="fas fa-envelope"></i>  iryanhealth@gmail.com</li>
+                        <li><i class="fas fa-envelope"></i> iryanhealth@gmail.com</li>
                         <li><i class="fas fa-clock"></i> Mon - Sat: 8am - 8pm</li>
                         <li><i class="fas fa-clock"></i> Sun: Closed</li>
                     </ul>
@@ -1247,190 +1601,1662 @@
         </div>
     </footer>
     
+    <!-- Floating WhatsApp Button -->
+    <div class="whatsapp-float" onclick="sendOrderViaWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+        <span>Order Now</span>
+    </div>
+    
     <!-- Notification -->
     <div class="notification" id="notification">
         <div id="notificationMessage">Product added to cart!</div>
     </div>
     
     <script>
-        // Updated Product Data
-const products = [
-    // Superfoods
+        // Product Data
+        const products = [
+          {
+ id: 222,
+    name: "Oat Fiber Powder",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/oatfiber.jpg",
+    description: ""
+},
+{
+ id: 222,
+    name: "Irish Seamos",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/seamos.jpg",
+    description: ""
+},
+{
+ id: 222,
+    name: "CocoCeps",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/cococeps.jpg",
+    description: ""
+},
+{
+ id: 2223,
+    name: "Organic Chlorella",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/chlorella.jpg",
+    description: ""
+},
+{
+ id: 2224,
+    name: "Blueberry Juice Powder",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/berry.jpg",
+    description: ""
+},
+{
+ id: 222,
+    name: "Super Ashwaghanda",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/ashwaganda.jpg",
+    description: ""
+},
+{
+ id: 2225,
+    name: "Aloe Vera Gel",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/aloe.jpg",
+    description: ""
+},
+{
+ id: 2229,
+    name: "Organic Super Greens",
+    category: "superfoods",
+    price: 0.00,
+    image: "photos/superfoods/super.jpg",
+    description: ""
+},
+
+            
+   // Natural Spices
+            {
+    id: 3,
+    name: "Organic Cayenne",
+    category: "spices",
+    price: 0.00,
+    image: "photos/spices/cayenne.jpg",
+    description: ""
+ },
     {
-        id: 1,
-        name: "Spirulina Powder",
-        category: "superfoods",
-        price: 35.00,
-        image: "https://images.unsplash.com/photo-1593197316200-7cb0656632c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Organic spirulina powder, rich in protein and antioxidants."
+   id: 4,
+   name: "All Purpose Seasoning",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/all.jpg",
+   description: ""
     },
     {
-        id: 2,
-        name: "Chia Seeds",
-        category: "superfoods",
-        price: 28.00,
-        image: "https://images.unsplash.com/photo-1515825832342-0e43f2fbb722?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Premium chia seeds, high in omega-3 and fiber."
+   id: 44,
+   name: "Vegeterian Broth Powder",
+   category: "spices",
+   price: 0.00,
+   image: "photos/spices/broth.jpg",
+   description: ""
     },
-    
-    // Natural Spices
-    {
-        id: 3,
-        name: "Turmeric Powder",
-        category: "spices",
-        price: 18.00,
-        image: "https://images.unsplash.com/photo-1587049633317-4c7d9e2c1b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Pure organic turmeric powder for cooking and wellness."
+        {
+   id: 444,
+   name: "Organic Ground Cayenne Pepper",
+   category: "spices",
+   price: 0.00,
+   image: "photos/spices/cay.jpg",
+   description: ""
     },
     {
-        id: 4,
-        name: "Cinnamon Sticks",
-        category: "spices",
-        price: 15.00,
-        image: "https://images.unsplash.com/photo-1550253006-4e6e9a07aa3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Organic cinnamon sticks for tea and cooking."
-    },
-    
-    // Juices
-    {
-        id: 5,
-        name: "Cold-Pressed Ginger Juice",
-        category: "juices",
-        price: 25.00,
-        image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Fresh cold-pressed ginger juice for immunity."
+   id: 4444,
+   name: "Fish Seasoning Powder",
+   category: "spices",
+   price: 0.00,
+   image: "photos/spices/fish.jpg",
+   description: ""
     },
     {
-        id: 6,
-        name: "Aloe Vera Juice",
-        category: "juices",
-        price: 22.00,
-        image: "https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Pure aloe vera juice for digestion and skin health."
+   id: 44444,
+   name: "Celtic Salt",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/celtic.jpg",
+   description: ""
     },
-    
-    // Natural Sweeteners
-    {
-        id: 7,
-        name: "Raw Honey",
-        category: "sweeteners",
-        price: 40.00,
-        image: "https://images.unsplash.com/photo-1558636508-e0db3814bd1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Pure, raw honey with natural enzymes intact."
-    },
-    {
-        id: 8,
-        name: "Coconut Sugar",
-        category: "sweeteners",
-        price: 25.00,
-        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Low glycemic coconut sugar, perfect for baking."
-    },
-    
-    // Ayurvedic Powders
-    {
-        id: 9,
-        name: "Ashwagandha Powder",
-        category: "ayurvedic",
-        price: 45.00,
-        image: "https://images.unsplash.com/photo-1593197316200-7cb0656632c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Traditional ayurvedic powder for stress relief."
+
+{
+   id: 44444,
+   name: "Ginger Powder",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/gin.jpg",
+   description: ""
     },
     {
-        id: 10,
-        name: "Triphala Powder",
-        category: "ayurvedic",
-        price: 38.00,
-        image: "https://images.unsplash.com/photo-1587049633317-4c7d9e2c1b0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Classic ayurvedic blend for digestive health."
-    },
-    
-    // Hair & Skin Essentials
-    {
-        id: 11,
-        name: "Argan Oil",
-        category: "hairskin",
-        price: 55.00,
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Pure argan oil for hair and skin nourishment."
+   id: 4444444,
+   name: "Ginger Powder",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/ginger.jpg",
+   description: ""
     },
     {
-        id: 12,
-        name: "Shea Butter",
-        category: "hairskin",
-        price: 32.00,
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Raw shea butter for moisturizing and healing."
-    },
-    
-    // Accessories
-    {
-        id: 13,
-        name: "Glass Storage Jars",
-        category: "accessories",
-        price: 35.00,
-        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Set of 3 glass jars for food storage."
+   id: 44444444,
+   name: "Smoky Spicy Grill",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/grill.jpg",
+   description: ""
     },
     {
-        id: 14,
-        name: "Bamboo Utensils",
-        category: "accessories",
-        price: 28.00,
-        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Eco-friendly bamboo utensil set."
+   id: 4,
+   name: "Himalayan Pink Salt",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/hima.jpg",
+   description: ""
     },
-    
-    // Original Categories (keep some)
+
     {
-        id: 15,
-        name: "Moringa Powder",
-        category: "herbs",
-        price: 25.00,
-        image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721fa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Pure organic moringa powder, rich in vitamins."
-    },
-    {
-        id: 16,
-        name: "Almonds",
-        category: "nuts",
-        price: 45.00,
-        image: "https://images.unsplash.com/photo-1550253006-4e6e9a07aa3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Raw California almonds, high in protein."
+   id: 45,
+   name: "Koobi & Momone Powder",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/koobi.jpg",
+   description: ""
     },
     {
-        id: 17,
-        name: "Quinoa",
-        category: "grains",
-        price: 55.00,
-        image: "https://images.unsplash.com/photo-1519098901909-b1553a1190af?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "High-protein quinoa, perfect for healthy meals."
+   id: 455,
+   name: "Paprika Powder",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/pap.jpg",
+   description: ""
     },
     {
-        id: 18,
-        name: "Ginger Tea",
-        category: "teas",
-        price: 18.00,
-        image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Organic ginger tea bags for digestion."
+   id: 4555,
+   name: "Himalayan Pink Salt",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/pink.jpg",
+   description: ""
     },
     {
-        id: 19,
-        name: "Vitamin C Supplements",
-        category: "supplements",
-        price: 35.00,
-        image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Natural vitamin C supplements from rose hips."
+   id: 45555,
+   name: "Northern Stew",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/season.jpg",
+   description: ""
     },
     {
-        id: 20,
-        name: "Coconut Oil",
+   id: 4,
+   name: "Soup Master",
+   category: "spices",
+   price: 15.00,
+   image: "photos/spices/soup.jpg",
+   description: ""
+    },
+
+            // Juices
+            {
+                id: 5,
+                name: "Cold-Pressed Ginger Juice",
+                category: "juices",
+                price: 25.00,
+                image: "https://images.unsplash.com/photo-1561047029-3000c68339ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Fresh cold-pressed ginger juice for immunity."
+            },
+            {
+                id: 6,
+                name: "Aloe Vera Juice",
+                category: "juices",
+                price: 22.00,
+                image: "photos/juices/vera.jpg",
+                description: "Pure aloe vera juice for digestion and skin health."
+            },
+            
+            // Natural Sweeteners
+            {
+                id: 7,
+                name: "Dried Cherries",
+                category: "sweeteners",
+                price: 40.00,
+                image: "photos/sweetners/cherries.jpg",
+                description: ""
+            },
+            {
+                id: 88,
+                name: "Soft Pitted Apricots",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/apricots.JPG",
+                description: ""
+
+            },
+            {
+                id: 89,
+                name: "Date Powder",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/date.jpg",
+                description: ""
+            },
+            {
+                id: 90,
+                name: "Honees",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/Molasses.jpg",
+                description: ""
+            },
+            {
+                id: 91,
+                name: "Monk Fruit Blend",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/monk.jpg",
+                description: ""
+            },
+            {
+                id: 92,
+                name: "Golden Raisings",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/raisins.jpg",
+                description: ""
+            },
+            {
+                id: 93,
+                name: "Raspberry Jam",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/ras.jpg",
+                description: ""
+            },
+            {
+                id: 94,
+                name: "Golden Syrup",
+                category: "sweeteners",
+                price: 0.00,
+                image: "photos/sweetners/syrup.jpg",
+                description: ""
+            },
+            
+            // Ayurvedic Powders
+            
+            {
+                id: 100,
+                name: "Triphala Powder",
+                category: "ayurvedic",
+                price: 38.00,
+                image: "photos/ayuverdic-powders/trip.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Amla Berry Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/amla.jpg",
+                description: ""
+            },
+
+            {
+                id: 9,
+                name: "Arjuna Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/arjuna.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Bacopa Monnier",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/baco.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Cinnamon Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/cin.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Ginger Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/ginn.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Kalmegh Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/kalm.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Licorice",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/licorice.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Mustard Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/mustard.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Turmeric Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/turm.jpg",
+                description: ""
+            },
+            {
+                id: 9,
+                name: "Turmeric Powder",
+                category: "ayurvedic",
+                price: 45.00,
+                image: "photos/ayuverdic-powders/turmeric.jpg",
+                description: ""
+            },
+            // Hair & Skin Essentials
+            {
+                id: 11,
+                name: "Argan Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/argan.jpg",
+                description: ""
+            },
+             {
+                id: 111,
+                name: "Amla Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/alma.jpg",
+                description: ""
+            },
+             {
+                id: 1111,
+                name: "Batana Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/bat.jpg",
+                description: ""
+            },
+             {
+                id: 1111,
+                name: "Magnesium Flakes Bath Soak",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/bath.jpg",
+                description: ""
+            },
+             {
+                id: 11111,
+                name: "Calendula Cream",
+                category: "hairskin",
+                price: 5.00,
+                image: "photos/hair-skin/calen.JPG",
+                description: ""
+            },
+             {
+                id: 111111,
+                name: "Jamaicam Black Castor Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/castor.jpg",
+                description: ""
+            },
+             {
+                id: 1111111,
+                name: "Dead Sea Bath Salt",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/dead.jpg",
+                description: ""
+            },
+             {
+                id: 11111111,
+                name: "Epsom Bath Salt",
+                category: "hairskin",
+                price: 5.00,
+                image: "photos/hair-skin/eps.jpg",
+                description: ""
+            },
+             {
+                id: 11222,
+                name: "Epsom Salts - Relaxing",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/epsom.jpg",
+                description: ""
+            },
+             {
+                id: 112,
+                name: "Frankincense Essential Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/franck.jpg",
+                description: ""
+            },
+             {
+                id: 11222,
+                name: "Glycerin Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/glyc.jpg",
+                description: ""
+            },
+             {
+                id: 11,
+                name: "Mindful Bath Salt",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/mbs.jpg",
+                description: ""
+            },
+             {
+                id: 113333,
+                name: "Moringa Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/morg.jpg",
+                description: ""
+            },
+             {
+                id: 113443,
+                name: "Neem Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/neem.jpg",
+                description: ""
+            },
+             {
+                id: 114444,
+                name: "Pomegranate Seed Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/pome.jpg",
+                description: ""
+            },
+             {
+                id: 11333333,
+                name: "Rosehip Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/ros.jpg",
+                description: ""
+            },
+             {
+                id: 112222222222,
+                name: "The 30 Day Beauty Secret",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/secret.jpg",
+                description: ""
+            },
+             {
+                id: 11233222,
+                name: "Spearmint Oil",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/spear.jpg",
+                description: ""
+            },
+             {
+                id: 112222222222,
+                name: "Natural Rose Water",
+                category: "hairskin",
+                price: 55.00,
+                image: "photos/hair-skin/water.jpg",
+                description: ""
+            },
+           
+            
+            // Accessories
+            {
+                id: 13,
+                name: "Glass Storage Jars",
+                category: "accessories",
+                price: 35.00,
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Set of 3 glass jars for food storage."
+            },
+            {
+                id: 14,
+                name: "Bamboo Utensils",
+                category: "accessories",
+                price: 28.00,
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                description: "Eco-friendly bamboo utensil set."
+            },
+            
+           //Natural Herbs
+{
+ id: 2221,
+    name: "Dandelion Leaves",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/dandelion.jpg",
+    description: ""
+},
+{ id: 22222, name: "Mint Leaves", category: "herbs", price: 0.00, image: "photos/herbs/mint.jpg", description: "" },
+
+{
+ id: 22342,
+    name: "Catnip Herb",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/catnip.jpg",
+    description: ""
+},
+{
+ id: 22332,
+    name: "Lavender",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/lavender.jpg",
+    description: ""
+},
+
+{
+ id: 222456,
+    name: "Calendula",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/calendula.jpg",
+    description: ""
+},
+
+{
+ id: 222654,
+    name: "Lemon Balm",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/lemon.jpg",
+    description: ""
+},
+{
+ id: 229872,
+    name: "Nettle",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/nettle.jpg",
+    description: ""
+},
+{
+ id: 222,
+    name: "alfafa",
+    category: "herbs",
+    price: 0.00,
+    image: "photos/herbs/alfafa.jpg",
+    description: ""
+},
+            {
+ id: 2200992,
+    name: "Brazil Nut",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/brazil.jpg",
+    description: ""
+},
+{
+ id: 22099289,
+    name: "Chia Seeds",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/chia.jpg",
+    description: ""
+},
+{
+ id: 2270992,
+    name: "Hazel Nut",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/hazel.jpg",
+    description: ""
+},
+{
+ id: 22097792,
+    name: "Flax Hemp Blend",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/flaxhemp.jpg",
+    description: ""
+},
+{
+ id: 22091192,
+    name: "Roasted Pistachio",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/pistachio.jpg",
+    description: ""
+},
+{
+ id: 22099332,
+    name: "Pumpkin Seeds",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/pumpkin.jpg",
+    description: ""
+},
+{
+ id: 22099255,
+    name: "Vitex Seeds",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/vitex.jpg",
+    description: ""
+},
+{
+ id: 2209921452,
+    name: "Sunflower Seeds",
+    category: "nuts",
+    price: 0.00,
+    image: "photos/nuts/sunflower.jpg",
+    description: ""
+},
+           //whole Grains
+{
+    id: 17,
+    name: "Quinoa",
+    category: "grains",
+    price: 0.00,
+    image: "photos/whole-foods/quinoa.jpg",
+    description: "High-protein quinoa, perfect for healthy meals."
+},
+ {
+    id: 171,
+    name: "Black Rice",
+    category: "grains",
+    price: 0.00,
+    image: "photos/whole-foods/black.jpg",
+    description: ""
+},
+
+            
+           //Herbal Teas
+{
+    id: 1811111,
+    name: "Ashwaganda Root",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/ashroot.jpg",
+    description: ""
+},
+
+{
+    id: 22182,
+    name: "Ashwaganda Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/ashwa.jpg",
+    description: ""
+},
+{
+    id: 31822,
+    name: "Lemon Balm",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/chamomile.jpg",
+    description: ""
+},
+{
+    id: 1844,
+    name: "Cinnamon Apple Spice",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/cinna.JPG",
+    description: ""
+},
+{
+    id: 18444,
+    name: "Red Clover",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/clover.jpg",
+    description: ""
+},
+{
+    id: 1558,
+    name: "Dandelion Leaf & Root",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/dande.jpg",
+    description: ""
+},
+{
+    id: 185555,
+    name: "Decaf Green Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/decaf.jpg",
+    description: ""
+},
+{
+    id: 18000,
+    name: "Organic Everyday Detox",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/detox.jpg",
+    description: ""
+},
+{
+    id: 1899,
+    name: "Dieters Drink",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/dieters.jpg",
+    description: ""
+},
+{
+    id: 18,
+    name: "Elderberry Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/elderberry.jpg",
+    description: ""
+},
+{
+    id: 1844444,
+    name: "Fruit Tea Sampler",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/fruitmix.jpg",
+    description: ""
+},
+{
+    id: 18555555,
+    name: "Organic Gas Relief",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/gas.jpg",
+    description: ""
+},
+{
+    id: 18442222,
+    name: "Gingko & Decaf Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/gingko.jpg",
+    description: ""
+},
+{
+    id: 180990,
+    name: "Ginger + Probiotic",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/ginpro.jpg",
+    description: ""
+},
+{
+    id: 187777,
+    name: "Glow Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/glow.jpg",
+    description: ""
+},
+{
+    id: 1888878,
+    name: "Fresh Green Loose Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/green.jpg",
+    description: ""
+},
+{
+    id: 1811111,
+    name: "Slim Green Coffee",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/greencoffee.jpg",
+    description: ""
+},
+{
+    id: 1822222,
+    name: "Green Tea with Lemon",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/greenlem.jpg",
+    description: ""
+},
+{
+    id: 18444444444,
+    name: "Green Tea with Toasted Rice",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/greenrice.jpg",
+    description: ""
+},
+{
+    id: 18,
+    name: "Horny Goat weed",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/horny.jpg",
+    description: ""
+},
+
+{
+    id: 18333333,
+    name: "Immune Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/immune.jpg",
+    description: ""
+},
+{
+    id: 1232328,
+    name: "Peppermint & Spearmint",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/infused.jpg",
+    description: ""
+},
+{
+    id: 18998898,
+    name: "Nutra Joint",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/joint.jpg",
+    description: ""
+},
+{
+    id: 1854545454,
+    name: "Nutra Lipid",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/lipid.jpg",
+    description: ""
+},
+{
+    id: 18121212,
+    name: "Tripple Mint",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/mintt.jpg",
+    description: ""
+},
+{
+    id: 1833422231,
+    name: "Kettle & Fire",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/kettle.jpg",
+    description: ""
+},
+{
+    id: 18332323223,
+    name: "Rosy Mood",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/mood.jpg",
+    description: ""
+},
+{
+    id: 180000,
+    name: "Mulberry Leaf",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/mulberry.jpg",
+    description: ""
+},
+{
+    id: 18,
+    name: "Mullein & Thyme",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/mullein.jpg",
+    description: ""
+},
+{
+    id: 18333333333333,
+    name: "Nighty Night Extra",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/nighty.jpg",
+    description: ""
+},
+{
+    id: 18909090,
+    name: "Nutra Cleanse",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/nutra.jpg",
+    description: ""
+},
+{
+    id: 183333333,
+    name: "Pregnancy Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/pregnancy.jpg",
+    description: ""
+},
+{
+    id: 18872872,
+    name: "Pure Chamomile.jpg",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/pure.jpg",
+    description: ""
+},
+{
+    id: 18087655,
+    name: "Organic Pure Green Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/puregreen.jpg",
+    description: ""
+},
+{
+    id: 188787387,
+    name: "Raspberry Leaf",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/rasp.jpg",
+    description: ""
+},
+{
+    id: 18123457,
+    name: "Reishi Mushroom",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/reishi.jpg",
+    description: ""
+},
+{
+    id: 18893733,
+    name: "Rose Hips & Hibiscus",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/rose.jpg",
+    description: ""
+},
+{
+    id: 1833309,
+    name: "Sencha Rose Green Tea",
+    category: "teas",
+    price: 0.00,
+    image: "photos/teas/sencha.jpg",
+    description: ""
+},
+            
+           //Supplements
+{
+    id: 19,
+    name: "Boric Acid",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/acid.jpg",
+    description: ""
+},
+{
+    id: 191,
+    name: "Aloe Vera Concentrate",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/aloe.jpg",
+    description: ""
+},
+{
+    id: 190,
+    name: "L-Arginine",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/arginine.jpg",
+    description: ""
+},
+{
+    id: 192,
+    name: "Ashwagandha",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/ash.jpg",
+    description: ""
+},
+{
+    id: 193,
+    name: "Baobab Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/bao.jpg",
+    description: ""
+},
+{
+    id: 194,
+    name: "Organic Blueberry Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/bberry.jpg",
+    description: ""
+},
+{
+    id: 195,
+    name: "Blueberry Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/bbpowder.jpg",
+    description: ""
+},
+{
+    id: 196,
+    name: "Pepin GI",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/best.jpg",
+    description: ""
+},
+{
+    id: 197,
+    name: "Burdock Root",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/burd.jpg",
+    description: ""
+},
+{
+    id: 198,
+    name: "Black Walnut Wormwood Complex",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/bwalnut.jpg",
+    description: ""
+},
+{
+    id: 199,
+    name: "Liquid Chlorophyll",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/chloro.jpg",
+    description: ""
+},
+{
+    id: 219,
+    name: "CollageUP",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/collage.jpg",
+    description: ""
+},
+{
+    id: 319,
+    name: "Creatine Monohydrate",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/creatine.jpg",
+    description: ""
+},
+{
+    id: 419,
+    name: "Daily Detox Smoothie Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/daily.jpg",
+    description: ""
+},
+{
+    id: 519,
+    name: "Damiana Leaves",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/damiana.jpg",
+    description: ""
+},
+{
+    id: 619,
+    name: "DGL",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/dgl.jpg",
+    description: ""
+},
+{
+    id: 719,
+    name: "D-Mannose",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/dman.jpg",
+    description: ""
+},
+{
+    id: 819,
+    name: "Dandelion Root",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/droot.jpg",
+    description: ""
+},
+{
+    id: 919,
+    name: "Elderberry Immune Complex",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/eld.jpg",
+    description: ""
+},
+{
+    id: 9219,
+    name: "Slippery Elm Bark",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/elm.jpg",
+    description: ""
+},
+{
+    id: 1999,
+    name: "Evening Primrose Oil",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/eve.jpg",
+    description: ""
+},
+{
+    id: 19998,
+    name: "Flax Chia Blend",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/flch.jpg",
+    description: ""
+},
+
+{
+    id: 19990,
+    name: "Beef Gelatine Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/gelatin.jpg",
+    description: ""
+},
+{
+    id: 1999990,
+    name: "Horny Goat Weed",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/goat.jpg",
+    description: ""
+},
+{
+    id: 29999,
+    name: "Blueberry Jam",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/good.jpg",
+    description: ""
+},
+{
+    id: 399999,
+    name: "Hawthorn Berries",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/haw.jpg",
+    description: ""
+},
+{
+    id: 400009,
+    name: "Hemp Protein",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/hemp.jpg",
+    description: ""
+},
+{
+    id: 145666669,
+    name: "Whole Psyllium Husks",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/husks.jpg",
+    description: ""
+},
+{
+    id: 19234234,
+    name: "Daily Immune Support",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/imm.jpg",
+    description: ""
+},
+{
+    id: 19443434343,
+    name: "Organic Kale Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/kale.jpg",
+    description: ""
+},
+{
+    id: 191223233,
+    name: "kelp",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/kelp.jpg",
+    description: ""
+},
+{
+    id: 32323232319,
+    name: "Lion's Mane Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/lion.jpg",
+    description: ""
+},
+{
+    id: 1900808080,
+    name: "Lemon Juice Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/ljpowder.jpg",
+    description: ""
+},
+{
+    id: 1954545454,
+    name: "Magnesium Glycinate Complex",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/magnesium.jpg",
+    description: ""
+},
+{
+    id: 1909090909,
+    name: "Methyl Folate",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/meth.jpg",
+    description: ""
+},
+{
+    id: 187474749,
+    name: "Milk Thistle Seed",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/mkseed.jpg",
+    description: ""
+},
+{
+    id: 19090999,
+    name: "Moringa Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/moringa.jpg",
+    description: ""
+},
+{
+    id: 14343439,
+    name: "MultiGrain Shake Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/mshake.jpg",
+    description: ""
+},
+{
+    id: 198989898,
+    name: "Mullein leaf - Liquid Extract",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/mull.jpg",
+    description: ""
+},
+{
+    id: 1909090909,
+    name: "Oat Milk Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/oat.jpg",
+    description: ""
+},
+{
+    id: 191111111,
+    name: "Probiotic",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/probio.jpg",
+    description: ""
+},
+{
+    id: 122222229,
+    name: "CoQ10",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/q10.jpg",
+    description: ""
+},
+{
+    id: 19323232323,
+    name: "Sarsaparilla Root",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/sars.jpg",
+    description: ""
+},
+{
+    id: 1988787878,
+    name: "Scullicap Herb",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/sculp.jpg",
+    description: ""
+},
+{
+    id: 1743873879,
+    name: "Irish Seamos",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/seamos.jpg",
+    description: ""
+},
+{
+    id: 14333339,
+    name: "Slippery Elm Bark",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/slip.jpg",
+    description: ""
+},
+{
+    id: 19999989,
+    name: "Sorghum Shake",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/sorghum.jpg",
+    description: ""
+},
+{
+    id: 777777719,
+    name: "Strawberry Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/straw.jpg",
+    description: ""
+},
+{
+    id: 198989899,
+    name: "Super Greens",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/superg.jpg",
+    description: ""
+},
+{
+    id: 19,
+    name: "Thorntina-7",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/thorn.jpg",
+    description: ""
+},
+{
+    id: 1987777777777778,
+    name: "Tigernut Shake Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/tshake.jpg",
+    description: ""
+},
+{
+    id: 90909019,
+    name: "Vitamin-D3",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/vd.jpg",
+    description: ""
+},
+{
+    id: 565656519,
+    name: "Organic Wheatgrass",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/wheat.jpg",
+    description: ""
+},
+{
+    id: 10980989,
+    name: "Whey Protein Powder",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/whey.jpg",
+    description: ""
+},
+{
+    id: 9102873719,
+    name: "Wormwood Herb",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/worm.jpg",
+    description: ""
+},
+{
+    id: 19,
+    name: "Zinc Picolinate",
+    category: "supplements",
+    price: 0.00,
+    image: "photos/supplements/zinc.jpg",
+    description: ""
+},
+            
+            // Healthy Oils
+            {
+         id: 20,
+        name: " Avocado Oil",
         category: "oils",
         price: 30.00,
-        image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-        description: "Cold-pressed virgin coconut oil."
-    }
-];
+        image: "photos/oils/avo.jpg",
+        description: ""
+            },
+             {
+         id: 201,
+        name: "Pure Ghee",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/ghee.jpg",
+        description: ""
+            },
+              {
+         id: 2011,
+        name: "Grapeseed Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/grape.jpg",
+        description: ""
+            },
+              {
+         id: 20111,
+        name: "Hemp Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/hemp.jpg",
+        description: ""
+            },
+              {
+         id: 201111,
+        name: "Jojoba Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/jojoba.jpg",
+        description: ""
+            },
+          
+              {
+         id: 2011111111,
+        name: "Linseed  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/linseed.jpg",
+        description: ""
+            },
+              {
+         id: 2022222,
+        name: " MCT Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/mct.jpg",
+        description: ""
+            },
+              {
+         id: 2022222222,
+        name: "MCT  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/mct.jpg",
+        description: ""
+            },
+              {
+         id: 20333,
+        name: "Mint Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/mint.jpg",
+        description: ""
+            },
+              {
+         id: 2022223,
+        name: "Mustard  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/must.jpg",
+        description: ""
+            },
+              {
+         id: 20,
+        name: "Olive  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/oil.jpg",
+        description: ""
+            },
+              {
+         id: 20,
+        name: "Olive  Oil Spray",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/oli.jpg",
+        description: ""
+            },
+              {
+         id: 20444,
+        name: "Oregano Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/ore.jpg",
+        description: ""
+            },
+              {
+         id: 204333,
+        name: "Oregano Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/oreg.jpg",
+        description: ""
+            },
+              {
+         id: 20,
+        name: "Oreganol",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/oreganol.jpg",
+        description: ""
+            },
+              {
+         id: 2055,
+        name: "Pumpkin  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/pump.jpg",
+        description: ""
+            },
+              {
+         id: 205555,
+        name: "Rosemary  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/rosem.jpg",
+        description: ""
+            },
+              {
+         id: 2055555,
+        name: "Sweet Almond  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/sao.jpg",
+        description: ""
+            },
+              {
+         id: 205555,
+        name: "Sesame  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/sesame.jpg",
+        description: ""
+            },
+              {
+         id: 2055566,
+        name: "Magnesium Tropical Spray",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/sp.jpg",
+        description: ""
+            },
+              {
+         id: 2066666,
+        name: "Extra Virgin Olive  Oil Spray",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/spray.jpg",
+        description: ""
+            },
+              {
+         id: 206666666,
+        name: "Sweet Almond  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/sweet.jpg",
+        description: ""
+            },
+              {
+         id: 20,
+        name: "Tea Tree  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/tea.jpg",
+        description: ""
+            },
+              {
+         id: 20898,
+        name: "Walnut  Oil",
+        category: "oils",
+        price: 30.00,
+        image: "photos/oils/waln.jpg",
+        description: ""
+            },
+             
+            
+            
+
+
+        ];
         
         // Shopping Cart
         let cart = JSON.parse(localStorage.getItem('iryanCart')) || [];
@@ -1445,9 +3271,28 @@ const products = [
         const closeCartBtn = document.getElementById('closeCart');
         const orderSummaryItems = document.getElementById('orderSummaryItems');
         const orderTotal = document.getElementById('orderTotal');
-        const deliveryFee = document.getElementById('deliveryFee');
         const notification = document.getElementById('notification');
         const notificationMessage = document.getElementById('notificationMessage');
+        
+        // WhatsApp Numbers
+        const whatsappNumbers = [
+            {
+                name: "Accra Store",
+                number: "233597144276",
+                location: "Madina - Rawlings Circle, Accra",
+                hours: "Mon-Sat: 8am-8pm"
+            },
+            {
+                name: "Kumasi Store",
+                number: "233550443487",
+                location: "Opposite KTI entrance, Amakom, Kumasi",
+                hours: "Mon-Sat: 8am-8pm"
+            }
+        ];
+        
+        // Lightbox Variables
+        let currentLightboxImageIndex = 0;
+        let currentLightboxImages = [];
         
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
@@ -1484,13 +3329,29 @@ const products = [
             filteredProducts.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
+                
+                // Check if product is in grains category to show size options
+                const isGrain = product.category === 'grains';
+                
                 productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="product-img">
+                    <img src="${product.image}" alt="${product.name}" class="product-img" onclick="openLightbox('${product.image}', '${product.name}')">
                     <div class="product-content">
                         <span class="product-category">${getCategoryName(product.category)}</span>
                         <h3>${product.name}</h3>
                         <p class="product-description">${product.description}</p>
-                        <div class="product-price">GH₵ ${product.price.toFixed(2)}</div>
+                        
+                        ${isGrain ? `
+                        <div class="size-selection">
+                            <label>Select Size:</label>
+                            <div class="size-options">
+                                <button class="size-btn active" data-size="250g" data-price="${product.price}">250g</button>
+                                <button class="size-btn" data-size="500g" data-price="${product.price * 2}">500g</button>
+                                <button class="size-btn" data-size="1kg" data-price="${product.price * 4}">1kg</button>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="product-price" id="price-${product.id}">GH₵ ${product.price.toFixed(2)}${isGrain ? ' (250g)' : ''}</div>
                         <div class="product-actions">
                             <div class="quantity-control">
                                 <button class="qty-btn" onclick="decreaseQty(${product.id})">-</button>
@@ -1504,6 +3365,31 @@ const products = [
                     </div>
                 `;
                 productsGrid.appendChild(productCard);
+                
+                // Add event listeners for size buttons if it's a grain product
+                if (isGrain) {
+                    const sizeButtons = productCard.querySelectorAll('.size-btn');
+                    sizeButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            // Remove active class from all buttons
+                            sizeButtons.forEach(btn => btn.classList.remove('active'));
+                            // Add active class to clicked button
+                            this.classList.add('active');
+                            
+                            // Update price display
+                            const newPrice = parseFloat(this.getAttribute('data-price'));
+                            const size = this.getAttribute('data-size');
+                            document.getElementById(`price-${product.id}`).textContent = `GH₵ ${newPrice.toFixed(2)} (${size})`;
+                            
+                            // Update product price in the products array
+                            const productIndex = products.findIndex(p => p.id === product.id);
+                            if (productIndex !== -1) {
+                                products[productIndex].currentPrice = newPrice;
+                                products[productIndex].selectedSize = size;
+                            }
+                        });
+                    });
+                }
             });
         }
         
@@ -1512,25 +3398,25 @@ const products = [
             displayProducts(category);
         }
         
-       // Get Category Name
-function getCategoryName(category) {
-    const categories = {
-        'superfoods': 'Superfoods',
-        'spices': 'Natural Spices',
-        'juices': 'Juices',
-        'sweeteners': 'Natural Sweeteners',
-        'ayurvedic': 'Ayurvedic Powders',
-        'hairskin': 'Hair & Skin Essentials',
-        'accessories': 'Accessories',
-        'herbs': 'Natural Herbs',
-        'nuts': 'Nuts & Seeds',
-        'grains': 'Whole Grains',
-        'teas': 'Natural Teas',
-        'supplements': 'Supplements',
-        'oils': 'Healthy Oils'
-    };
-    return categories[category] || category;
-}
+        // Get Category Name
+        function getCategoryName(category) {
+            const categories = {
+                'superfoods': 'Superfoods',
+                'spices': 'Natural Spices',
+                'juices': 'Juices',
+                'sweeteners': 'Natural Sweeteners',
+                'ayurvedic': 'Ayurvedic Powders',
+                'hairskin': 'Hair & Skin Essentials',
+                'accessories': 'Accessories',
+                'herbs': 'Natural Herbs',
+                'nuts': 'Nuts & Seeds',
+                'grains': 'Whole Grains',
+                'teas': 'Natural Teas',
+                'supplements': 'Supplements',
+                'oils': 'Healthy Oils'
+            };
+            return categories[category] || category;
+        }
         
         // Quantity Controls
         function increaseQty(productId) {
@@ -1553,8 +3439,20 @@ function getCategoryName(category) {
             const qtyInput = document.getElementById(`qty-${productId}`);
             const quantity = parseInt(qtyInput.value);
             
+            // Get selected size for grains
+            let selectedSize = '250g'; // Default size
+            let finalPrice = product.price;
+            
+            if (product.category === 'grains') {
+                const activeSizeBtn = document.querySelector(`#price-${productId}`).parentElement.querySelector('.size-btn.active');
+                if (activeSizeBtn) {
+                    selectedSize = activeSizeBtn.getAttribute('data-size');
+                    finalPrice = parseFloat(activeSizeBtn.getAttribute('data-price'));
+                }
+            }
+            
             // Check if product already in cart
-            const existingItem = cart.find(item => item.id === productId);
+            const existingItem = cart.find(item => item.id === productId && item.size === selectedSize);
             
             if (existingItem) {
                 existingItem.quantity += quantity;
@@ -1562,9 +3460,10 @@ function getCategoryName(category) {
                 cart.push({
                     id: product.id,
                     name: product.name,
-                    price: product.price,
+                    price: finalPrice,
                     image: product.image,
-                    quantity: quantity
+                    quantity: quantity,
+                    size: product.category === 'grains' ? selectedSize : null
                 });
             }
             
@@ -1573,7 +3472,7 @@ function getCategoryName(category) {
             
             // Update UI
             updateCartCount();
-            showNotification(`${product.name} added to cart!`);
+            showNotification(`${product.name} ${product.category === 'grains' ? `(${selectedSize})` : ''} added to cart!`);
             
             // Reset quantity to 1
             qtyInput.value = 1;
@@ -1634,15 +3533,15 @@ function getCategoryName(category) {
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img" onclick="openLightbox('${item.image}', '${item.name}')">
                     <div class="cart-item-details">
-                        <h4>${item.name}</h4>
-                        <div class="cart-item-price">GH₵ ${item.price.toFixed(2)}</div>
+                        <h4>${item.name} ${item.size ? `(${item.size})` : ''}</h4>
+                        <div class="cart-item-price">GH₵ ${item.price.toFixed(2)}${item.size ? ` per ${item.size}` : ''}</div>
                         <div class="cart-item-qty">
-                            <button onclick="updateCartItemQty(${item.id}, -1)">-</button>
+                            <button onclick="updateCartItemQty(${item.id}, '${item.size}', -1)">-</button>
                             <span>${item.quantity}</span>
-                            <button onclick="updateCartItemQty(${item.id}, 1)">+</button>
-                            <button class="remove-item" onclick="removeCartItem(${item.id})">Remove</button>
+                            <button onclick="updateCartItemQty(${item.id}, '${item.size}', 1)">+</button>
+                            <button class="remove-item" onclick="removeCartItem(${item.id}, '${item.size}')">Remove</button>
                         </div>
                     </div>
                 `;
@@ -1653,14 +3552,14 @@ function getCategoryName(category) {
         }
         
         // Update Cart Item Quantity
-        function updateCartItemQty(productId, change) {
-            const item = cart.find(item => item.id === productId);
+        function updateCartItemQty(productId, size, change) {
+            const item = cart.find(item => item.id === productId && item.size === size);
             
             if (item) {
                 item.quantity += change;
                 
                 if (item.quantity < 1) {
-                    removeCartItem(productId);
+                    removeCartItem(productId, size);
                 } else {
                     localStorage.setItem('iryanCart', JSON.stringify(cart));
                     renderCartItems();
@@ -1671,8 +3570,8 @@ function getCategoryName(category) {
         }
         
         // Remove Cart Item
-        function removeCartItem(productId) {
-            cart = cart.filter(item => item.id !== productId);
+        function removeCartItem(productId, size) {
+            cart = cart.filter(item => !(item.id === productId && item.size === size));
             localStorage.setItem('iryanCart', JSON.stringify(cart));
             renderCartItems();
             updateCartCount();
@@ -1699,7 +3598,7 @@ function getCategoryName(category) {
                 const summaryItem = document.createElement('div');
                 summaryItem.className = 'order-summary-item';
                 summaryItem.innerHTML = `
-                    <span>${item.name} x${item.quantity}</span>
+                    <span>${item.name} ${item.size ? `(${item.size})` : ''} x${item.quantity}</span>
                     <span>GH₵ ${itemTotal.toFixed(2)}</span>
                 `;
                 orderSummaryItems.appendChild(summaryItem);
@@ -1716,20 +3615,239 @@ function getCategoryName(category) {
             
             // Calculate delivery fee
             let delivery = 15.00;
-            if (subtotal >= 200) {
-                delivery = 0.00;
-                deliveryFee.textContent = 'FREE';
-                deliveryFee.style.color = 'var(--primary)';
-                deliveryFee.style.fontWeight = 'bold';
-            } else {
-                deliveryFee.textContent = `GH₵ ${delivery.toFixed(2)}`;
-                deliveryFee.style.color = '';
-                deliveryFee.style.fontWeight = '';
-            }
             
             // Calculate total
             const total = subtotal + delivery;
             orderTotal.textContent = `GH₵ ${total.toFixed(2)}`;
+        }
+        
+        // Calculate Subtotal
+        function calculateSubtotal() {
+            return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        }
+        
+        // Calculate Delivery Fee
+        function calculateDeliveryFee() {
+            return 15.00;
+        }
+        
+        // Calculate Total
+        function calculateTotal() {
+            return calculateSubtotal() + calculateDeliveryFee();
+        }
+        
+        // WhatsApp Order Functionality
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) {
+                showNotification('Please add items to your cart first');
+                return;
+            }
+            
+            // Get customer info from form if available
+            const firstName = document.getElementById('firstName')?.value || '';
+            const lastName = document.getElementById('lastName')?.value || '';
+            const phone = document.getElementById('phone')?.value || '';
+            const email = document.getElementById('email')?.value || '';
+            const address = document.getElementById('address')?.value || '';
+            const area = document.getElementById('area')?.value || '';
+            const deliveryDate = document.getElementById('deliveryDate')?.value || '';
+            const notes = document.getElementById('notes')?.value || '';
+            
+            // Build order summary
+            let orderSummary = `*NEW ORDER - Iryan Health & Organics*\n\n`;
+            
+            if (firstName || lastName) {
+                orderSummary += `*Customer:* ${firstName} ${lastName}\n`;
+            }
+            if (phone) {
+                orderSummary += `*Phone:* ${phone}\n`;
+            }
+            if (email) {
+                orderSummary += `*Email:* ${email}\n`;
+            }
+            if (address) {
+                orderSummary += `*Address:* ${address}\n`;
+            }
+            if (area) {
+                orderSummary += `*Area:* ${area}\n`;
+            }
+            if (deliveryDate) {
+                orderSummary += `*Delivery Date:* ${deliveryDate}\n`;
+            }
+            
+            orderSummary += `\n*Order Details:*\n`;
+            orderSummary += `────────────────\n`;
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                orderSummary += `${index + 1}. ${item.name}${item.size ? ` (${item.size})` : ''}\n`;
+                orderSummary += `   Quantity: ${item.quantity}\n`;
+                orderSummary += `   Price: GH₵ ${item.price.toFixed(2)} each\n`;
+                orderSummary += `   Subtotal: GH₵ ${itemTotal.toFixed(2)}\n\n`;
+            });
+            
+            orderSummary += `────────────────\n`;
+            orderSummary += `*Subtotal:* GH₵ ${total.toFixed(2)}\n`;
+            orderSummary += `*Delivery Fee:* GH₵ 15.00\n`;
+            orderSummary += `*Total:* GH₵ ${(total + 15).toFixed(2)}\n\n`;
+            
+            if (notes) {
+                orderSummary += `*Special Instructions:*\n${notes}\n\n`;
+            }
+            
+            orderSummary += `_Order placed via Iryan Health & Organics Website_`;
+            
+            // Store order summary for WhatsApp
+            localStorage.setItem('whatsappOrderSummary', orderSummary);
+            
+            // Show WhatsApp number selection modal
+            showWhatsAppModal();
+        }
+        
+        function showWhatsAppModal() {
+            const modal = document.getElementById('whatsappModal');
+            const optionsContainer = document.getElementById('whatsappOptions');
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add WhatsApp number options
+            whatsappNumbers.forEach((number, index) => {
+                const option = document.createElement('div');
+                option.className = 'whatsapp-option';
+                option.onclick = () => selectWhatsAppNumber(index);
+                option.innerHTML = `
+                    <i class="fab fa-whatsapp"></i>
+                    <div class="whatsapp-option-content">
+                        <h4>${number.name}</h4>
+                        <p>${number.location}</p>
+                        <p><small>${number.hours}</small></p>
+                    </div>
+                `;
+                optionsContainer.appendChild(option);
+            });
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeWhatsAppModal() {
+            const modal = document.getElementById('whatsappModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        let selectedWhatsAppNumber = null;
+        
+        function selectWhatsAppNumber(index) {
+            selectedWhatsAppNumber = whatsappNumbers[index];
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.whatsapp-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            document.querySelectorAll('.whatsapp-option')[index].classList.add('selected');
+            
+            // Add send button
+            const optionsContainer = document.getElementById('whatsappOptions');
+            const sendButton = document.createElement('div');
+            sendButton.style.marginTop = '20px';
+            sendButton.innerHTML = `
+                <button class="btn btn-whatsapp btn-full" onclick="openWhatsAppChat()">
+                    <i class="fab fa-whatsapp"></i> Open WhatsApp to Send Order
+                </button>
+            `;
+            
+            // Remove previous send button if exists
+            const existingButton = optionsContainer.querySelector('.whatsapp-send-btn');
+            if (existingButton) {
+                existingButton.remove();
+            }
+            
+            sendButton.className = 'whatsapp-send-btn';
+            optionsContainer.appendChild(sendButton);
+        }
+        
+        function openWhatsAppChat() {
+            if (!selectedWhatsAppNumber) {
+                showNotification('Please select a WhatsApp number first');
+                return;
+            }
+            
+            const orderSummary = localStorage.getItem('whatsappOrderSummary') || '';
+            const encodedMessage = encodeURIComponent(orderSummary);
+            const whatsappUrl = `https://wa.me/${selectedWhatsAppNumber.number}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappUrl, '_blank');
+            
+            // Close modal
+            closeWhatsAppModal();
+            
+            // Show confirmation
+            showNotification(`Opening WhatsApp to ${selectedWhatsAppNumber.name}...`);
+        }
+        
+        // Lightbox Functionality
+        function openLightbox(imageSrc, productName) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            // Get all product images in current view
+            const productCards = document.querySelectorAll('.product-card');
+            currentLightboxImages = [];
+            
+            productCards.forEach(card => {
+                const img = card.querySelector('.product-img');
+                if (img) {
+                    currentLightboxImages.push({
+                        src: img.src,
+                        alt: img.alt
+                    });
+                }
+            });
+            
+            // Find current image index
+            currentLightboxImageIndex = currentLightboxImages.findIndex(img => img.src === imageSrc);
+            
+            // Set image and caption
+            lightboxImg.src = imageSrc;
+            lightboxCaption.textContent = productName;
+            
+            // Show lightbox
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function changeLightboxImage(direction) {
+            if (currentLightboxImages.length === 0) return;
+            
+            currentLightboxImageIndex += direction;
+            
+            // Loop around if at ends
+            if (currentLightboxImageIndex < 0) {
+                currentLightboxImageIndex = currentLightboxImages.length - 1;
+            } else if (currentLightboxImageIndex >= currentLightboxImages.length) {
+                currentLightboxImageIndex = 0;
+            }
+            
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = currentLightboxImages[currentLightboxImageIndex].src;
+            lightboxCaption.textContent = currentLightboxImages[currentLightboxImageIndex].alt;
         }
         
         // Handle Order Form Submission
@@ -1760,42 +3878,33 @@ function getCategoryName(category) {
                 orderDate: new Date().toLocaleString()
             };
             
-            // In a real application, you would send this data to your backend
-            // For this demo, we'll just show a confirmation
-            console.log('Order placed:', orderData);
+            // Show order confirmation with WhatsApp option
+            const confirmation = confirm(`Thank you for your order, ${orderData.customer.firstName}!\n\nYour order total is GH₵ ${orderData.total.toFixed(2)}\n\nWould you like to:\n1. Submit via Form (Recommended)\n2. Send via WhatsApp\n\nClick OK for Form submission or Cancel for WhatsApp.`);
             
-            // Show success message
-            alert(`Thank you for your order, ${orderData.customer.firstName}! Your order has been received and will be delivered to ${orderData.customer.area} on ${orderData.customer.deliveryDate}. We will contact you at ${orderData.customer.phone} to confirm.`);
-            
-            // Reset form and cart
-            document.getElementById('orderForm').reset();
-            cart = [];
-            localStorage.removeItem('iryanCart');
-            updateCartCount();
-            updateOrderSummary();
-            renderCartItems();
-            
-            // Reset delivery date
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('deliveryDate').value = tomorrow.toISOString().split('T')[0];
+            if (confirmation) {
+                // Submit via form (existing functionality)
+                console.log('Order placed via form:', orderData);
+                
+                // Show success message
+                alert(`Thank you for your order, ${orderData.customer.firstName}! Your order has been received and will be delivered to ${orderData.customer.area} on ${orderData.customer.deliveryDate}. We will contact you at ${orderData.customer.phone} to confirm.`);
+                
+                // Reset form and cart
+                document.getElementById('orderForm').reset();
+                cart = [];
+                localStorage.removeItem('iryanCart');
+                updateCartCount();
+                updateOrderSummary();
+                renderCartItems();
+                
+                // Reset delivery date
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                document.getElementById('deliveryDate').value = tomorrow.toISOString().split('T')[0];
+            } else {
+                // Send via WhatsApp
+                sendOrderViaWhatsApp();
+            }
         });
-        
-        // Calculate Subtotal
-        function calculateSubtotal() {
-            return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        }
-        
-        // Calculate Delivery Fee
-        function calculateDeliveryFee() {
-            const subtotal = calculateSubtotal();
-            return subtotal >= 200 ? 0 : 15;
-        }
-        
-        // Calculate Total
-        function calculateTotal() {
-            return calculateSubtotal() + calculateDeliveryFee();
-        }
         
         // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
@@ -1812,6 +3921,40 @@ function getCategoryName(category) {
         // Close cart when clicking overlay
         cartOverlay.addEventListener('click', closeCart);
         closeCartBtn.addEventListener('click', closeCart);
+        
+        // Close lightbox when clicking outside image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+        
+        // Close WhatsApp modal when clicking outside
+        document.getElementById('whatsappModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeWhatsAppModal();
+            }
+        });
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxImage(1);
+                }
+            }
+            
+            // Close WhatsApp modal with ESC key
+            const whatsappModal = document.getElementById('whatsappModal');
+            if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+                closeWhatsAppModal();
+            }
+        });
         
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1833,3 +3976,65 @@ function getCategoryName(category) {
     </script>
 </body>
 </html>
+Key Features Added:
+1. Image Lightbox
+Click any product image to open it in a full-screen lightbox
+Navigate between images with arrow buttons or keyboard arrows
+Close with ESC key or clicking outside
+Shows product name as caption
+2. WhatsApp Order Integration
+Floating WhatsApp button for quick ordering
+WhatsApp option in cart sidebar
+WhatsApp option in order form
+Store selection (Accra or Kumasi)
+Pre-filled WhatsApp message with order details
+Order summary formatted for WhatsApp
+3. Gram Size Selection for Grains
+Size buttons (250g, 500g, 1kg) for grain products
+Dynamic price updates based on selected size
+Size information shows in cart and order summary
+Default size is 250g
+4. Complete Order Flow
+Browse products with image lightbox
+Add to cart with size selection for grains
+View cart with WhatsApp option
+Fill order form or use WhatsApp
+Select store location for WhatsApp orders
+Send order directly to your WhatsApp
+5. How to Use WhatsApp Orders:
+Customer adds items to cart
+Clicks "Order via WhatsApp" button
+Selects store location (Accra or Kumasi)
+WhatsApp opens with pre-filled order message
+Customer reviews and sends message
+You receive order directly on WhatsApp
+6. Order Message Format:
+*NEW ORDER - Iryan Health & Organics*
+
+*Customer:* John Doe
+*Phone:* +233 123 456 789
+*Address:* 123 Main St, Madina
+*Area:* Madina
+*Delivery Date:* 2024-01-15
+
+*Order Details:*
+────────────────
+1. Quinoa (1kg)
+   Quantity: 2
+   Price: GH₵ 100.00 each
+   Subtotal: GH₵ 200.00
+
+2. Almonds
+   Quantity: 1
+   Price: GH₵ 45.00 each
+   Subtotal: GH₵ 45.00
+
+────────────────
+*Subtotal:* GH₵ 245.00
+*Delivery Fee:* GH₵ 15.00
+*Total:* GH₵ 260.00
+
+*Special Instructions:*
+Please deliver after 5 PM
+
+_Order placed via Iryan Health & Organics Website_
